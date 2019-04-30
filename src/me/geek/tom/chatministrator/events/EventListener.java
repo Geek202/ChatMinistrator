@@ -20,7 +20,7 @@ public class EventListener implements Listener {
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         if (Util.capsScore(event.getMessage()) > ChatMinistratorMain.plugin.config.getInt("capsScoreMax")) {
             this.cancelPlayerChatMessage(event, "No caps in chat please.");
-            alertOps(event.getPlayer().getDisplayName() + " tried to post a chat message with too many caps!");
+            Util.alertOps(ChatColor.WHITE + event.getPlayer().getDisplayName() + ChatColor.RED + " tried to post a chat message with too many caps!");
         }
 
         if (ChatMinistratorMain.plugin.config.getBoolean("blacklistEnable")) {
@@ -30,27 +30,17 @@ public class EventListener implements Listener {
                 if (event.getMessage().contains(blacklist.get(i))) {
                     this.cancelPlayerChatMessage(event, "Your message contains blacklisted words.");
                     if (ChatMinistratorMain.plugin.config.getBoolean("alertOpsToBlacklist")) {
-                        alertOps(event.getPlayer().getDisplayName() + " tried to post a blacklisted word to chat!");
+                        Util.alertOps(ChatColor.WHITE + event.getPlayer().getDisplayName() + ChatColor.RED + " tried to post a blacklisted word to chat!");
                     }
                 }
 
             }
         }
     }
-    public void cancelPlayerChatMessage(AsyncPlayerChatEvent event, String reason) {
+
+    public static void cancelPlayerChatMessage(AsyncPlayerChatEvent event, String reason) {
         event.setCancelled(true);
         event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new ComponentBuilder(reason).color(ChatColor.RED).create());
         event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 0.7f);
-    }
-    
-    public void alertOps(String issue) {
-        Set<OfflinePlayer> ops = ChatMinistratorMain.plugin.getServer().getOperators();
-        Iterator<OfflinePlayer> opsIter = ops.iterator();
-        while (opsIter.hasNext()) {
-            OfflinePlayer player = opsIter.next();
-            if (player.getPlayer() != null) {
-                player.getPlayer().sendMessage(issue);
-            }
-        }
     }
 }

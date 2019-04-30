@@ -1,6 +1,16 @@
 package me.geek.tom.chatministrator.util;
 
+import me.geek.tom.chatministrator.ChatMinistratorMain;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Sound;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class Util {
 
@@ -28,5 +38,16 @@ public class Util {
             }
         }
         return score;
+    }
+
+    public static void alertOps(String issue) {
+        Set<OfflinePlayer> ops = ChatMinistratorMain.plugin.getServer().getOperators();
+        Iterator<OfflinePlayer> opsIter = ops.iterator();
+        while (opsIter.hasNext()) {
+            OfflinePlayer player = opsIter.next();
+            if (player.getPlayer() != null) {
+                player.getPlayer().sendMessage(issue);
+            }
+        }
     }
 }
