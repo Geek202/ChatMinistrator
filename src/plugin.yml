@@ -1,0 +1,5 @@
+name: ChatMinistrator
+version: 0.1
+author: Tom_The_Geek
+main: me.geek.tom.chatministrator.ChatMinistratorMain
+api-version: 1.13

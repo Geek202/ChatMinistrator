@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ChatMinistrator" default="CreateJar" basedir = ".">
+
+    <basename file="${basedir}" property="project.projectname"/>
+    <property name="project.pluginsLocation" location="C:\\Users\\Tom\\Documents\\Plugins\\Server\\plugins"/>
+
+    <target name="clean" description="Cleans project">
+        <delete file="${project.pluginsLocation}\${project.projectname}.jar"/>
+    </target>
+
+    <target name="CreateJar" description="Create a jar for the project" depends="clean">
+        <jar destfile="${project.pluginsLocation}\${project.projectname}.jar">
+            <fileset dir="${basedir}">
+                <include name="**.yml"/>
+            </fileset>
+            <fileset dir="${basedir}\out\production\${project.projectname}">
+                <include name="**"/>
+            </fileset>
+        </jar>
+    </target>
+</project>
