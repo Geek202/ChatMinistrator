@@ -1,6 +1,8 @@
 package me.geek.tom.chatministrator;
 
 import com.google.common.collect.Lists;
+import me.geek.tom.chatministrator.commands.CommandAdd;
+import me.geek.tom.chatministrator.commands.CommandRemove;
 import me.geek.tom.chatministrator.events.EventListener;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -38,6 +40,8 @@ public class ChatMinistratorMain extends JavaPlugin {
         saveConfig();
 
         getServer().getPluginManager().registerEvents(new EventListener(), this);
+        this.getCommand("cmblacklistadd").setExecutor(new CommandAdd());
+        this.getCommand("cmblacklistremove").setExecutor(new CommandRemove());
 
     }
 

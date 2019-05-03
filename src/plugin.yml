@@ -3,3 +3,12 @@ version: 0.1
 author: Tom_The_Geek
 main: me.geek.tom.chatministrator.ChatMinistratorMain
 api-version: 1.13
+commands:
+  cmblacklistadd:
+    description: Add words to the ChatMinistrator blacklist
+    usage: /cmblacklistadd <word>
+    aliases: [cmbadd, cmba]
+  cmblacklistremove:
+    description: Remove a word from the ChatMinistrator blacklist
+    usage: /cmblacklistremove <word>
+    aliases: [cmbremove,cmbrm]

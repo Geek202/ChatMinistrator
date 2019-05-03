@@ -26,7 +26,7 @@ public class EventListener implements Listener {
             List<String> blacklist = ChatMinistratorMain.plugin.config.getStringList("blacklist");
             for (int i = 0; i < blacklist.size(); i++) {
                 ChatMinistratorMain.plugin.getLOGGER().info(blacklist.get(i));
-                if (event.getMessage().contains(blacklist.get(i))) {
+                if (event.getMessage().toLowerCase().contains(blacklist.get(i).toLowerCase())) {
                     cancelPlayerChatMessage(event, "Your message contains blacklisted words.");
                     if (ChatMinistratorMain.plugin.config.getBoolean("alertOpsToBlacklist")) {
                         Util.alertOps(ChatColor.WHITE + event.getPlayer().getDisplayName() + ChatColor.RED + " tried to post a blacklisted word to chat!");

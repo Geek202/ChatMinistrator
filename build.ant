@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="ChatMinistrator" default="CreateJar" basedir = ".">
+<project name="ChatMinistrator" default="Create1.13Jar" basedir = ".">
 
     <basename file="${basedir}" property="project.projectname"/>
     <property name="project.pluginsLocation" location="C:\\Users\\Tom\\Documents\\Plugins\\Server\\plugins"/>
+    <property name="project.buildOut" location=".\\outJars"/>
 
     <target name="clean" description="Cleans project">
         <delete file="${project.pluginsLocation}\${project.projectname}.jar"/>
     </target>
 
-    <target name="CreateJar" description="Create a jar for the project" depends="clean">
+    <target name="cleanOld" description="Cleans old versions">
+        <delete file="${project.buildOut}\${project.projectname}-OldMcVer.jar"/>
+    </target>
+
+    <target name="Create1.13Jar" description="Create a jar for the project" depends="clean">
         <jar destfile="${project.pluginsLocation}\${project.projectname}.jar">
+            <fileset dir="${basedir}">
+                <include name="**.yml"/>
+            </fileset>
+            <fileset dir="${basedir}\out\production\${project.projectname}">
+                <include name="**"/>
+            </fileset>
+        </jar>
+    </target>
+    <target name="CreateOldVersionJar" description="Create a jar for the project" depends="cleanOld">
+        <jar destfile="${project.buildOut}\${project.projectname}-OldMcVer.jar">
             <fileset dir="${basedir}">
                 <include name="**.yml"/>
             </fileset>
